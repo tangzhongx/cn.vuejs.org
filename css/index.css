@@ -18,7 +18,7 @@
 }
 @font-face {
   font-family: "Dosis";
-  src: local("Dosis Medium"), local("Dosis-Medium"), url("/fonts/Roboto_Mono/Dosis-Medium.ttf");
+  src: local("Dosis Medium"), local("Dosis-Medium"), url("/fonts/Dosis/Dosis-Medium.ttf");
   font-weight: 500;
 }
 .gutter pre {
