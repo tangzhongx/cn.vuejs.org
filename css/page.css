@@ -16,6 +16,11 @@
   font-family: "Roboto Mono";
   src: local("Roboto Mono"), url("/fonts/Roboto_Mono/RobotoMono-Regular.ttf");
 }
+@font-face {
+  font-family: "Dosis";
+  src: local("Dosis Medium"), local("Dosis-Medium"), url("/fonts/Roboto_Mono/Dosis-Medium.ttf");
+  font-weight: 500;
+}
 .gutter pre {
   color: #999;
 }
@@ -286,7 +291,7 @@ a.button.white {
   display: none;
   box-sizing: border-box;
   max-height: calc(100vh - 61px);
-  overflow-y: scroll;
+  overflow-y: auto;
   position: absolute;
   top: 100%;
   right: -15px;
@@ -342,7 +347,7 @@ a.button.white {
 }
 #header {
   background-color: #fff;
-  height: $heading-inner-height;
+  height: 40px;
   padding: 10px 60px;
   position: relative;
   z-index: 2;
@@ -360,7 +365,7 @@ body.docs #nav {
   margin: 0;
   padding: 0;
   position: absolute;
-  right: 60px;
+  right: 30px;
   top: 10px;
   height: 40px;
   line-height: 40px;
@@ -380,6 +385,23 @@ body.docs #nav {
 .nav-link.current {
   border-bottom: 3px solid #42b983;
 }
+.nav-link.shop {
+  margin-left: 10px;
+}
+.new-label {
+  position: absolute;
+  top: 3px;
+  left: 110%;
+  background-color: #42b983;
+  color: #fff;
+  line-height: 16px;
+  height: 16px;
+  font-size: 9px;
+  font-weight: bold;
+  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  padding: 1px 4px 0 6px;
+  border-radius: 4px;
+}
 .search-query {
   height: 30px;
   line-height: 30px;
@@ -391,7 +413,7 @@ body.docs #nav {
   border-radius: 15px;
   margin-right: 10px;
   transition: border-color 0.2s ease;
-  background: #fff url("/images/search.png") 8px 5px no-repeat;
+  background: #fff url("../images/search.png") 8px 5px no-repeat;
   background-size: 20px;
   vertical-align: middle !important;
 }
@@ -403,7 +425,7 @@ body.docs #nav {
   font-size: 1.5em;
   line-height: 40px;
   color: #2c3e50;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 500;
 }
 #logo img {
@@ -443,7 +465,8 @@ body.docs #nav {
   background-size: 30px;
 }
 #demo,
-.demo {
+.demo,
+.content .demo {
   border: 1px solid #eee;
   border-radius: 2px;
   padding: 25px 35px;
@@ -458,53 +481,66 @@ body.docs #nav {
   overflow-x: auto;
 }
 #demo h1,
-.demo h1 {
+.demo h1,
+.content .demo h1 {
   margin: 0 0 0.5em;
   font-size: 1.8em;
 }
 #demo ul,
 .demo ul,
+.content .demo ul,
 #demo ol,
-.demo ol {
+.demo ol,
+.content .demo ol {
   padding-left: 1.5em;
   padding-bottom: 0.2em !important;
 }
 #demo ul:first-child,
 .demo ul:first-child,
+.content .demo ul:first-child,
 #demo ol:first-child,
-.demo ol:first-child {
+.demo ol:first-child,
+.content .demo ol:first-child {
   margin-top: 0;
 }
 #demo ul:last-child,
 .demo ul:last-child,
+.content .demo ul:last-child,
 #demo ol:last-child,
-.demo ol:last-child {
+.demo ol:last-child,
+.content .demo ol:last-child {
   margin-bottom: 0;
 }
 #demo li,
-.demo li {
+.demo li,
+.content .demo li {
   color: #34495e;
 }
 #demo li.done,
-.demo li.done {
+.demo li.done,
+.content .demo li.done {
   color: #7f8c8d;
   text-decoration: line-through;
 }
 #demo p,
-.demo p {
+.demo p,
+.content .demo p {
   margin: 0 !important;
   padding: 0 !important;
 }
 #demo p:first-child,
-.demo p:first-child {
+.demo p:first-child,
+.content .demo p:first-child {
   margin-top: 0;
 }
 #demo p:last-child,
-.demo p:last-child {
+.demo p:last-child,
+.content .demo p:last-child {
   margin-bottom: 0;
 }
 #demo textarea,
-.demo textarea {
+.demo textarea,
+.content .demo textarea {
   width: 100%;
   resize: vertical;
 }
@@ -544,6 +580,7 @@ ul.demo li {
   color: #b9465c;
 }
 .content.guide[class*="migration"] .upgrade-path {
+  margin-top: 2em;
   padding: 2em;
   background: rgba(73,195,140,0.1);
   border-radius: 2px;
@@ -553,6 +590,7 @@ ul.demo li {
 }
 .content.guide[class*="migration"] .upgrade-path > p:last-child {
   margin-bottom: 0;
+  padding-bottom: 0;
 }
 .sidebar {
   position: absolute;
@@ -574,8 +612,11 @@ ul.demo li {
 .sidebar ul {
   list-style-type: none;
   margin: 0;
-  line-height: 1.8em;
+  line-height: 1.5em;
   padding-left: 1em;
+}
+.sidebar li {
+  margin-bottom: 0.5em;
 }
 .sidebar .version-select {
   vertical-align: middle;
@@ -625,8 +666,12 @@ ul.demo li {
   color: #7f8c8d;
   font-size: 0.85em;
 }
-.sidebar .main-sponsor a {
+.sidebar .main-sponsor .logo {
+  color: #7f8c8d;
   margin: 10px 0;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: bold;
 }
 .sidebar .main-sponsor img,
 .sidebar .main-sponsor a {
@@ -675,6 +720,31 @@ ul.demo li {
     transform: translate(0, 0);
   }
 }
+.content.menu {
+  font-size: 1.2em;
+}
+.content.menu .menu-root {
+  padding-left: 0;
+}
+.content.menu #search-form,
+.content.menu .algolia-autocomplete,
+.content.menu input {
+  width: 100%;
+}
+.content.menu .aa-dropdown-menu {
+  box-sizing: border-box;
+}
+.content.menu h3 {
+  margin: 1.5em 0 0.75em;
+}
+.content.menu h3:before,
+.content.menu h3:after {
+  display: none;
+}
+.content.menu li {
+  list-style-type: none;
+  margin-top: 0.1em;
+}
 #header {
   box-shadow: 0 0 1px rgba(0,0,0,0.25);
   transition: background-color 0.3s ease-in-out;
@@ -682,7 +752,7 @@ ul.demo li {
 .content {
   position: relative;
   padding: 2.2em 0;
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
 }
 .content.api > a:first-of-type > h2 {
@@ -694,8 +764,9 @@ ul.demo li {
   line-height: 1.4em;
 }
 .content.api ul ul,
-.content.api ul p {
-  margin: 0.6em 0;
+.content.api ul p:not(.tip) {
+  padding-bottom: 0;
+  margin: 1.2em 0;
 }
 .content a.button {
   font-size: 0.9em;
@@ -766,10 +837,11 @@ ul.demo li {
 .content ul,
 .content ol {
   padding-left: 1.5em;
+  position: inherit;
 }
 .content a {
   color: #42b983;
-  font-weight: 400;
+  font-weight: 600;
 }
 .content blockquote {
   margin: 2em 0;
@@ -779,32 +851,37 @@ ul.demo li {
 .content blockquote p {
   font-weight: 600;
   margin-left: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 .content iframe {
   margin: 1em 0;
 }
 .content > table {
-  border: 2px solid $white;
+  border-spacing: 0;
+  border-collapse: collapse;
   margin: 1.2em auto;
-  padding: 1em;
+  padding: 0;
+  display: block;
+  overflow-x: auto;
 }
 .content > table td,
 .content > table th {
-  line-height: 1.6em;
-  padding: 0.5em 1.4em;
+  line-height: 1.5em;
+  padding: 0.4em 0.8em;
   border: none;
-}
-.content > table td {
-  background-color: #fcfcfc;
+  border: 1px solid #ddd;
 }
 .content > table th {
-  background-color: #42b983;
-  color: #fff;
-  padding-top: 0.85em;
-  padding-bottom: 0.85em;
+  font-weight: bold;
   text-align: left;
 }
-.content > table tbody code {
+.content > table th,
+.content > table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+.content > table th code,
+.content > table tr:nth-child(2n) code {
   background-color: #efefef;
 }
 .content p.tip {
@@ -829,7 +906,7 @@ ul.demo li {
   text-align: center;
   line-height: 20px;
   font-weight: bold;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   font-size: 14px;
 }
 .content p.tip code {
@@ -857,9 +934,9 @@ ul.demo li {
     background-color: rgba(255,255,255,0.4);
   }
 }
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 1300px) {
   .content.with-sidebar {
-    margin-left: 280px;
+    margin-left: 290px;
   }
   #ad {
     z-index: 7;
