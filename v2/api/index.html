@@ -1058,7 +1058,7 @@
 </ul>
 </li>
 <li><p><strong>用法：</strong></p>
-<p>移除事件监听器。</p>
+<p>移除自定义事件监听器。</p>
 <ul>
 <li><p>如果没有提供参数，则移除所有的事件监听器；</p>
 </li>
@@ -1418,6 +1418,20 @@
 <li><p><strong>参考：</strong> <a href="../guide/components.html#具名-Slot">具名 Slots</a></p>
 </li>
 </ul>
+<h3 id="is"><a href="#is" class="headerlink" title="is"></a>is</h3><ul>
+<li><p><strong>Expects:</strong> <code>string</code></p>
+<p>Used for <a href="../guide/components.html#Dynamic-Components">dynamic components</a> and to work around <a href="../guide/components.html#DOM-Template-Parsing-Caveats">limitations of in-DOM templates</a>.</p>
+<p>For example:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="comment">&lt;!-- component changes when currentView changes --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">v-bind:is</span>=<span class="string">"currentView"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- necessary because &lt;my-row&gt; would be invalid inside --&gt;</span></div><div class="line"><span class="comment">&lt;!-- a &lt;table&gt; element and so would be hoisted out      --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">tr</span> <span class="attr">is</span>=<span class="string">"my-row"</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>For detailed usage, follow the links in the description above.</p>
+</li>
+<li><p><strong>See also:</strong></p>
+<ul>
+<li><a href="../guide/components.html#Dynamic-Components">Dynamic Components</a></li>
+<li><a href="../guide/components.html#DOM-Template-Parsing-Caveats">DOM Template Parsing Caveats</a></li>
+</ul>
+</li>
+</ul>
 <h2 id="内置的组件"><a href="#内置的组件" class="headerlink" title="内置的组件"></a>内置的组件</h2><h3 id="component"><a href="#component" class="headerlink" title="component"></a>component</h3><ul>
 <li><p><strong>Props：</strong></p>
 <ul>
@@ -1503,6 +1517,7 @@
 <p>当组件在 <code>&lt;keep-alive&gt;</code> 内被切换，它的 <code>activated</code> 和 <code>deactivated</code> 这两个生命周期钩子函数将会被对应执行。</p>
 <p>主要用于保留组件状态或避免重新渲染。</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 基本 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"view"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 多个条件判断的子组件 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">comp-a</span> <span class="attr">v-if</span>=<span class="string">"a &gt; 1"</span>&gt;</span><span class="tag">&lt;/<span class="name">comp-a</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">comp-b</span> <span class="attr">v-else</span>&gt;</span><span class="tag">&lt;/<span class="name">comp-b</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 和 &lt;transition&gt; 一起使用 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">transition</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"view"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Note, <code>&lt;keep-alive&gt;</code> is designed for the case where it has one direct child component that is being toggled. It does not work if you have <code>v-for</code> inside it. When there are multiple conditional children, as above, <code>&lt;keep-alive&gt;</code> requires that only one child is rendered at a time.</p>
 </li>
 <li><p><strong><code>include</code> and <code>exclude</code></strong></p>
 <blockquote>
