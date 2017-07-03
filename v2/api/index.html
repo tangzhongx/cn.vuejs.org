@@ -260,7 +260,7 @@
 <li><p><strong>默认值：</strong> 默认抛出错误</p>
 </li>
 <li><p><strong>用法：</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.config.errorHandler = <span class="function"><span class="keyword">function</span> (<span class="params">err, vm</span>) </span>&#123;</div><div class="line">  <span class="comment">// handle error</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.config.errorHandler = <span class="function"><span class="keyword">function</span> (<span class="params">err, vm, info</span>) </span>&#123;</div><div class="line">  <span class="comment">// handle error</span></div><div class="line">  <span class="comment">// `info` 是 Vue 特定的错误信息，比如错误所在的生命周期钩子</span></div><div class="line">  <span class="comment">// 只在 2.2.0+ 可用</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>指定组件的渲染和观察期间未捕获错误的处理函数。这个处理函数被调用时，可获取错误信息和 Vue 实例。</p>
 <blockquote>
 <p><a href="https://sentry.io" target="_blank" rel="external">Sentry</a>, 一个错误追踪服务, 通过此选项提供<a href="https://sentry.io/for/vue/" target="_blank" rel="external">官方集成</a>。</p>
@@ -283,7 +283,8 @@
 <li><p><strong>默认值：</strong> <code>{}</code></p>
 </li>
 <li><p><strong>用法：</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.config.keyCodes = &#123;</div><div class="line">  <span class="attr">v</span>: <span class="number">86</span>,</div><div class="line">  <span class="attr">f1</span>: <span class="number">112</span>,</div><div class="line">  <span class="attr">mediaPlayPause</span>: <span class="number">179</span>,</div><div class="line">  <span class="attr">up</span>: [<span class="number">38</span>, <span class="number">87</span>]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.config.keyCodes = &#123;</div><div class="line">  <span class="attr">v</span>: <span class="number">86</span>,</div><div class="line">  <span class="attr">f1</span>: <span class="number">112</span>,</div><div class="line">  <span class="comment">// camelCase 不可用</span></div><div class="line">  mediaPlayPause: <span class="number">179</span>,</div><div class="line">  <span class="comment">// 取而代之的是 kebab-case 且用双引号括起来</span></div><div class="line">  <span class="string">"media-play-pause"</span>: <span class="number">179</span>,</div><div class="line">  <span class="attr">up</span>: [<span class="number">38</span>, <span class="number">87</span>]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> @<span class="attr">keyup.media-play-pause</span>=<span class="string">"method"</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>给 v-on 自定义键位别名。</p>
 </li>
 </ul>
@@ -349,13 +350,13 @@
 <li><p><strong>参考：</strong> <a href="../guide/reactivity.html#异步更新队列">异步更新队列</a></p>
 </li>
 </ul>
-<h3 id="Vue-set">Vue.set( object, key, value )</h3>
+<h3 id="Vue-set">Vue.set( target, key, value )</h3>
 
 <ul>
 <li><p><strong>参数：</strong></p>
 <ul>
-<li><code>{Object} object</code></li>
-<li><code>{string} key</code></li>
+<li><code>{Object | Array} target</code></li>
+<li><code>{string | number} key</code></li>
 <li><code>{any} value</code></li>
 </ul>
 </li>
@@ -734,7 +735,6 @@
 <ul>
 <li><strong>参考：</strong><ul>
 <li><a href="../guide/custom-directive.html">自定义指令</a></li>
-<li><a href="../guide/components.html#Assets-Naming-Convention">资源命名约定</a></li>
 </ul>
 </li>
 </ul>
@@ -806,6 +806,49 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> CompA = &#123; ... &#125;</div><div class="line"></div><div class="line"><span class="comment">// 在没有调用 Vue.extend 时候继承 CompA</span></div><div class="line"><span class="keyword">var</span> CompB = &#123;</div><div class="line">  <span class="attr">extends</span>: CompA,</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<h3 id="provide-inject"><a href="#provide-inject" class="headerlink" title="provide / inject"></a>provide / inject</h3><blockquote>
+<p>New in 2.2.0</p>
+</blockquote>
+<ul>
+<li><p><strong>Type:</strong></p>
+<ul>
+<li><strong>provide:</strong> <code>Object | () =&gt; Object</code></li>
+<li><strong>inject:</strong> <code>Array&lt;string&gt; | { [key: string]: string | Symbol }</code></li>
+</ul>
+</li>
+<li><p><strong>Details:</strong></p>
+<p class="tip"><code>provide</code> and <code>inject</code> are primarily provided for advanced plugin / component library use cases. It is NOT recommended to use them in generic application code.</p>
+
+<p>This pair of options are used together to allow an ancestor component to serve as a dependency injector for its all descendants, regardless of how deep the component hierarchy is, as long as they are in the same parent chain. If you are familiar with React, this is very similar to React’s context feature.</p>
+<p>The <code>provide</code> option should be an object or a function that returns an object. This object contains the properties that are available for injection into its descendants. You can use ES2015 Symbols as keys in this object, but only in environments that natively support <code>Symbol</code> and <code>Reflect.ownKeys</code>.</p>
+<p>The <code>inject</code> options should be either an Array of strings or an object where the keys stand for the local binding name, and the value being the key (string or Symbol) to search for in available injections.</p>
+<blockquote>
+<p>Note: the <code>provide</code> and <code>inject</code> bindings are NOT reactive. This is intentional. However, if you pass down an observed object, properties on that object do remain reactive.</p>
+</blockquote>
+</li>
+<li><p><strong>Example:</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> Provider = &#123;</div><div class="line">  <span class="attr">provide</span>: &#123;</div><div class="line">    <span class="attr">foo</span>: <span class="string">'bar'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> Child = &#123;</div><div class="line">  <span class="attr">inject</span>: [<span class="string">'foo'</span>],</div><div class="line">  created () &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.foo) <span class="comment">// -&gt; "bar"</span></div><div class="line">  &#125;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>With ES2015 Symbols, function <code>provide</code> and object <code>inject</code>:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">const</span> s = <span class="built_in">Symbol</span>()</div><div class="line"></div><div class="line"><span class="keyword">const</span> Provider = &#123;</div><div class="line">  provide () &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      [s]: <span class="string">'foo'</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> Child = &#123;</div><div class="line">  <span class="attr">inject</span>: &#123; s &#125;,</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>The next 2 examples only work with Vue &gt; 2.2.1. Below that version, injected values were resolved after the <code>props</code> and the <code>data</code> initialization.</p>
+</blockquote>
+<p>Using an injected value as the default for a prop:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">const</span> Child = &#123;</div><div class="line">  <span class="attr">inject</span>: [<span class="string">'foo'</span>],</div><div class="line">  <span class="attr">props</span>: &#123;</div><div class="line">    <span class="attr">bar</span>: &#123;</div><div class="line">      <span class="keyword">default</span> () &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.foo</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Using an injected value as data entry:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">const</span> Child = &#123;</div><div class="line">  <span class="attr">inject</span>: [<span class="string">'foo'</span>],</div><div class="line">  data () &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">bar</span>: <span class="keyword">this</span>.foo</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Options-Misc"><a href="#Options-Misc" class="headerlink" title="Options / Misc"></a>Options / Misc</h2><h3 id="name-1"><a href="#name-1" class="headerlink" title="name"></a>name</h3><ul>
+<li><p><strong>Type:</strong> <code>string</code></p>
+</li>
+<li><p><strong>Restriction:</strong> only respected when used as a component option.</p>
+</li>
+<li><p><strong>Details:</strong></p>
+<p>Allow the component to recursively invoke itself in its template. Note that when a component is registered globally with <code>Vue.component()</code>, the global ID is automatically set as its name.</p>
+<p>Another benefit of specifying a <code>name</code> option is debugging. Named components result in more helpful warning messages. Also, when inspecting an app in the <a href="https://github.com/vuejs/vue-devtools" target="_blank" rel="external">vue-devtools</a>, unnamed components will show up as <code>&lt;AnonymousComponent&gt;</code>, which isn’t very informative. By providing the <code>name</code> option, you will get a much more informative component tree.</p>
+</li>
+</ul>
 <h3 id="delimiters"><a href="#delimiters" class="headerlink" title="delimiters"></a>delimiters</h3><ul>
 <li><p><strong>类型:</strong> <code>Array&lt;string&gt;</code></p>
 </li>
@@ -826,8 +869,23 @@
 <li><p><strong>详细:</strong></p>
 <p>使组件无状态（没有 <code>data</code> ）和无实例（没有 <code>this</code> 上下文）。他们用一个简单的 <code>render</code> 函数返回虚拟节点使他们更容易渲染。</p>
 </li>
-<li><p><strong>参考：
-</strong> <a href="../guide/render-function.html#函数化组件">函数式组件</a></p>
+<li><p><strong>参考：</strong> <a href="../guide/render-function.html#函数化组件">函数式组件</a></p>
+</li>
+</ul>
+<h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><blockquote>
+<p>New in 2.2.0</p>
+</blockquote>
+<ul>
+<li><p><strong>Type:</strong> <code>{ prop?: string, event?: string }</code></p>
+</li>
+<li><p><strong>Details:</strong></p>
+<p>Allows a custom component to customize the prop and event used when it’s used with <code>v-model</code>. By default, <code>v-model</code> on a component uses <code>value</code> as the prop and <code>input</code> as the event, but some input types such as checkboxes and radio buttons may want to use the <code>value</code> prop for a different purpose. Using the <code>model</code> option can avoid the conflict in such cases.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  <span class="attr">model</span>: &#123;</div><div class="line">    <span class="attr">prop</span>: <span class="string">'checked'</span>,</div><div class="line">    <span class="attr">event</span>: <span class="string">'change'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">props</span>: &#123;</div><div class="line">    <span class="comment">// this allows using the `value` prop for a different purpose</span></div><div class="line">    value: <span class="built_in">String</span>,</div><div class="line">    <span class="comment">// use `checked` as the prop which take the place of `value`</span></div><div class="line">    checked: &#123;</div><div class="line">      <span class="attr">type</span>: <span class="built_in">Number</span>,</div><div class="line">      <span class="attr">default</span>: <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-checkbox</span> <span class="attr">v-model</span>=<span class="string">"foo"</span> <span class="attr">value</span>=<span class="string">"some value"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-checkbox</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>The above will be equivalent to:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-checkbox</span></span></div><div class="line">  <span class="attr">:checked</span>=<span class="string">"foo"</span></div><div class="line">  @<span class="attr">change</span>=<span class="string">"val =&gt; &#123; foo = val &#125;"</span></div><div class="line">  <span class="attr">value</span>=<span class="string">"some value"</span>&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">my-checkbox</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="实例属性"><a href="#实例属性" class="headerlink" title="实例属性"></a>实例属性</h2><h3 id="vm-data"><a href="#vm-data" class="headerlink" title="vm.$data"></a>vm.$data</h3><ul>
@@ -986,13 +1044,13 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">vm.$watch(<span class="string">'a'</span>, callback, &#123;</div><div class="line">  <span class="attr">immediate</span>: <span class="literal">true</span></div><div class="line">&#125;)</div><div class="line"><span class="comment">// 立即以 `a` 的当前值触发回调</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="vm-set">vm.$set( object, key, value )</h3>
+<h3 id="vm-set">vm.$set( target, key, value )</h3>
 
 <ul>
 <li><p><strong>参数：</strong></p>
 <ul>
-<li><code>{Object} object</code></li>
-<li><code>{string} key</code></li>
+<li><code>{Object | Array} target</code></li>
+<li><code>{string | number} key</code></li>
 <li><code>{any} value</code></li>
 </ul>
 </li>
@@ -1004,13 +1062,13 @@
 <li><p><strong>另见：</strong> <a href="#Vue-set">Vue.set</a></p>
 </li>
 </ul>
-<h3 id="vm-delete">vm.$delete( object, key )</h3>
+<h3 id="vm-delete">vm.$delete( target, key )</h3>
 
 <ul>
 <li><p><strong>参数：</strong></p>
 <ul>
-<li><code>{Object} object</code></li>
-<li><code>{string} key</code></li>
+<li><code>{Object | Array} target</code></li>
+<li><code>{string | number} key</code></li>
 </ul>
 </li>
 <li><p><strong>用法：</strong></p>
