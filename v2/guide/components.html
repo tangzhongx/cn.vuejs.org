@@ -446,7 +446,7 @@
         
         
         <li>
-            <a href="/v2/guide/deployment.html" class="sidebar-link">生产环境部署</a>
+            <a href="/v2/guide/deployment.html" class="sidebar-link">生产环境部署提示</a>
         </li>
     
         
@@ -836,17 +836,17 @@ new Vue({
 <h3 id="使用自定义事件的表单输入组件"><a href="#使用自定义事件的表单输入组件" class="headerlink" title="使用自定义事件的表单输入组件"></a>使用自定义事件的表单输入组件</h3><p>自定义事件可以用来创建自定义的表单输入组件，使用 <code>v-model</code> 来进行数据双向绑定。看看这个：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"something"</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>这不过是以下示例的语法糖：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-bind:value</span>=<span class="string">"something"</span> <span class="attr">v-on:input</span>=<span class="string">"something = $event.target.value"</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span></span></div><div class="line">  <span class="attr">v-bind:value</span>=<span class="string">"something"</span></div><div class="line">  <span class="attr">v-on:input</span>=<span class="string">"something = $event.target.value"</span>&gt;</div></pre></td></tr></table></figure>
 <p>所以在组件中使用时，它相当于下面的简写：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">custom-input</span> <span class="attr">v-bind:value</span>=<span class="string">"something"</span> <span class="attr">v-on:input</span>=<span class="string">"something = arguments[0]"</span>&gt;</span><span class="tag">&lt;/<span class="name">custom-input</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>所以要让组件的 <code>v-model</code> 生效，它必须：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">custom-input</span></span></div><div class="line">  <span class="attr">v-bind:value</span>=<span class="string">"something"</span></div><div class="line">  <span class="attr">v-on:input</span>=<span class="string">"something = arguments[0]"</span>&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">custom-input</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>所以要让组件的 <code>v-model</code> 生效，它应该 (在 2.2.0+ 这是可配置的)：</p>
 <ul>
 <li>接受一个 <code>value</code> 属性</li>
 <li>在有新的 value 时触发 <code>input</code> 事件</li>
 </ul>
 <p>我们来看一个非常简单的货币输入的自定义控件：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">currency-input</span> <span class="attr">v-model</span>=<span class="string">"price"</span>&gt;</span><span class="tag">&lt;/<span class="name">currency-input</span>&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.component(<span class="string">'currency-input'</span>, &#123;</div><div class="line">  <span class="attr">template</span>: <span class="string">'\</span></div><div class="line">    &lt;span&gt;\</div><div class="line">      $\</div><div class="line">      &lt;input\</div><div class="line">        ref="input"\</div><div class="line">        v-bind:value="value"\</div><div class="line">        v-on:input="updateValue($event.target.value)"\</div><div class="line">      &gt;\</div><div class="line">    &lt;/span&gt;\</div><div class="line">  ',</div><div class="line">  <span class="attr">props</span>: [<span class="string">'value'</span>],</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    <span class="comment">// 不是直接更新值，而是使用此方法来对输入值进行格式化和位数限制</span></div><div class="line">    updateValue: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> formattedValue = value</div><div class="line">        <span class="comment">// 删除两侧的空格符</span></div><div class="line">        .trim()</div><div class="line">        <span class="comment">// 保留 2 小数位</span></div><div class="line">        .slice(</div><div class="line">          <span class="number">0</span>,</div><div class="line">          value.indexOf(<span class="string">'.'</span>) === <span class="number">-1</span></div><div class="line">            ? value.length</div><div class="line">            : value.indexOf(<span class="string">'.'</span>) + <span class="number">3</span></div><div class="line">        )</div><div class="line">      <span class="comment">// 如果值不统一，手动覆盖以保持一致</span></div><div class="line">      <span class="keyword">if</span> (formattedValue !== value) &#123;</div><div class="line">        <span class="keyword">this</span>.$refs.input.value = formattedValue</div><div class="line">      &#125;</div><div class="line">      <span class="comment">// 通过 input 事件发出数值</span></div><div class="line">      <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, <span class="built_in">Number</span>(formattedValue))</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.component(<span class="string">'currency-input'</span>, &#123;</div><div class="line">  <span class="attr">template</span>: <span class="string">`</span></div><div class="line">    &lt;span&gt;</div><div class="line">      $</div><div class="line">      &lt;input</div><div class="line">        ref="input"</div><div class="line">        v-bind:value="value"</div><div class="line">        v-on:input="updateValue($event.target.value)"</div><div class="line">      &gt;</div><div class="line">    &lt;/span&gt;</div><div class="line">  `,</div><div class="line">  <span class="attr">props</span>: [<span class="string">'value'</span>],</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    <span class="comment">// 不是直接更新值，而是使用此方法来对输入值进行格式化和位数限制</span></div><div class="line">    updateValue: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> formattedValue = value</div><div class="line">        <span class="comment">// 删除两侧的空格符</span></div><div class="line">        .trim()</div><div class="line">        <span class="comment">// 保留 2 小数位</span></div><div class="line">        .slice(</div><div class="line">          <span class="number">0</span>,</div><div class="line">          value.indexOf(<span class="string">'.'</span>) === <span class="number">-1</span></div><div class="line">            ? value.length</div><div class="line">            : value.indexOf(<span class="string">'.'</span>) + <span class="number">3</span></div><div class="line">        )</div><div class="line">      <span class="comment">// 如果值不统一，手动覆盖以保持一致</span></div><div class="line">      <span class="keyword">if</span> (formattedValue !== value) &#123;</div><div class="line">        <span class="keyword">this</span>.$refs.input.value = formattedValue</div><div class="line">      &#125;</div><div class="line">      <span class="comment">// 通过 input 事件发出数值</span></div><div class="line">      <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, <span class="built_in">Number</span>(formattedValue))</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 
 <div id="currency-input-example" class="demo">
   <currency-input v-model="price"></currency-input>
@@ -883,9 +883,7 @@ Vue.component('currency-input', {
 })
 new Vue({
   el: '#currency-input-example',
-  data: {
-    price: 0
-  }
+  data: { price: '' }
 })
 </script>
 

@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head>
-        <title>生产环境部署 — Vue.js</title>
+        <title>生产环境部署提示 — Vue.js</title>
         <meta charset="utf-8">
         <meta name="description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <meta property="og:type" content="article">
-        <meta property="og:title" content="生产环境部署 — Vue.js">
+        <meta property="og:title" content="生产环境部署提示 — Vue.js">
         <meta property="og:description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
         <meta property="og:image" content="https://cn.vuejs.org//images/logo.png">
 
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="生产环境部署 — Vue.js">
+        <meta name="twitter:title" content="生产环境部署提示 — Vue.js">
         <meta name="twitter:description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
         <meta name="twitter:image" content="https://cn.vuejs.org/images/logo.png">
 
@@ -446,7 +446,7 @@
         
         
         <li>
-            <a href="/v2/guide/deployment.html" class="sidebar-link current">生产环境部署</a>
+            <a href="/v2/guide/deployment.html" class="sidebar-link current">生产环境部署提示</a>
         </li>
     
         
@@ -587,10 +587,10 @@
       
     
     
-      <h1>生产环境部署</h1>
+      <h1>生产环境部署提示</h1>
     
     
-    <h2 id="利用生产状态"><a href="#利用生产状态" class="headerlink" title="利用生产状态"></a>利用生产状态</h2><p>开发时，Vue 会提供很多警告来帮你解决常见的错误与陷阱。生产时，这些警告语句却没有用，反而会增加你的载荷量。再次，有些警告检查有小的运行时费用，生产时可以避免的。</p>
+    <h2 id="开启生产环境模式"><a href="#开启生产环境模式" class="headerlink" title="开启生产环境模式"></a>开启生产环境模式</h2><p>开发时，Vue 会提供很多警告来帮你解决常见的错误与陷阱。生产时，这些警告语句却没有用，反而会增加你的载荷量。再次，有些警告检查有小的运行时开销，生产环境模式下是可以避免的。</p>
 <h3 id="不用打包工具"><a href="#不用打包工具" class="headerlink" title="不用打包工具"></a>不用打包工具</h3><p>如果用 Vue 完整独立版本（直接用 <code>&lt;script&gt;</code> 元素引入 Vue），生产时应该用精简版本（<code>vue.min.js</code>)。请查看<a href="installation.html#独立版本">安装指导</a>，附有开发与精简版本。</p>
 <h3 id="用打包工具"><a href="#用打包工具" class="headerlink" title="用打包工具"></a>用打包工具</h3><p>如果用 Webpack 或 Browserify 类似的打包工具时，生产状态会在 Vue 源码中由 <code>process.env.NODE_ENV</code> 决定，默认在开发状态。Webpack 与 Browserify 两个打包工具都提供方法来覆盖此变量并使用生产状态，警告语句也会被精简掉。每一个 <code>vue-cli</code> 模版有预先配置好的打包工具，但了解怎样配置会更好。</p>
 <h4 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h4><p>使用 Webpack 的 <a href="http://webpack.github.io/docs/list-of-plugins.html#defineplugin" target="_blank" rel="external">DefinePlugin</a> 来指定生产环境，以便在压缩时可以让 UglifyJS 自动删除代码块内的警告语句。例如配置：</p>
@@ -600,13 +600,19 @@
 <li>使用一个全局 <a href="https://github.com/hughsk/envify" target="_blank" rel="external">envify</a> 转换你的 bundle 文件。这可以精简掉包含在 Vue 源码中所有环境变量条件相关代码块内的警告语句。例如：</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">NODE_ENV=production browserify -g envify <span class="_">-e</span> main.js | uglifyjs -c -m &gt; build.js</div></pre></td></tr></table></figure>
+<h4 id="Rollup"><a href="#Rollup" class="headerlink" title="Rollup"></a>Rollup</h4><p>使用 <a href="https://github.com/rollup/rollup-plugin-replace" target="_blank" rel="external">rollup-plugin-replace</a>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">const</span> replace = <span class="built_in">require</span>(<span class="string">'rollup-plugin-replace'</span>)</div><div class="line">rollup(&#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">  plugins: [</div><div class="line">    replace(&#123;</div><div class="line">      <span class="string">'process.env.NODE_ENV'</span>: <span class="built_in">JSON</span>.stringify( <span class="string">'production'</span> )</div><div class="line">    &#125;)</div><div class="line">  ]</div><div class="line">&#125;).then(...)</div></pre></td></tr></table></figure>
+<h2 id="预编译模板"><a href="#预编译模板" class="headerlink" title="预编译模板"></a>预编译模板</h2><p>When using in-DOM templates or in-JavaScript template strings, the template-to-render-function compilation is performed on the fly. This is usually fast enough in most cases, but is best avoided if your application is performance-sensitive.</p>
+<p>The easiest way to pre-compile templates is using <a href="./single-file-components.html">Single-File Components</a> - the associated build setups automatically performs pre-compilation for you, so the built code contains the already compiled render functions instead of raw template strings.</p>
+<p>If you are using Webpack, and prefer separating JavaScript and template files, you can use <a href="https://github.com/ktsn/vue-template-loader" target="_blank" rel="external">vue-template-loader</a>, which also transforms the template files into JavaScript render functions during the build step.</p>
+<h2 id="提取-CSS"><a href="#提取-CSS" class="headerlink" title="提取 CSS"></a>提取 CSS</h2><p>When using Single-File Components, the CSS inside components are injected dynamically as <code>&lt;style&gt;</code> tags via JavaScript. This has a small runtime cost, and if you are using server-side rendering it will cause a “flash of unstyled content”. Extracting the CSS across all components into the same file and avoid these issues, and also result in better CSS minification and caching.</p>
+<p>Refer to the respective build tool documentations to see how it’s done:</p>
 <ul>
-<li>使用 vueify 中包含的 extract-css 插件，提取样式到单独的css文件。</li>
+<li><a href="http://vue-loader.vuejs.org/en/configurations/extract-css.html" target="_blank" rel="external">Webpack + vue-loader</a> (the <code>vue-cli</code> webpack template has this pre-configured)</li>
+<li><a href="https://github.com/vuejs/vueify#css-extraction" target="_blank" rel="external">Browserify + vueify</a></li>
+<li><a href="https://github.com/znck/rollup-plugin-vue#options" target="_blank" rel="external">Rollup + rollup-plugin-vue</a></li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o build.css ] <span class="_">-e</span> main.js | uglifyjs -c -m &gt; build.js</div></pre></td></tr></table></figure>
 <h2 id="跟踪运行时错误"><a href="#跟踪运行时错误" class="headerlink" title="跟踪运行时错误"></a>跟踪运行时错误</h2><p>如果在组件渲染时出现运行错误，错误将会被传递至全局 <code>Vue.config.errorHandler</code> 配置函数（如果已设置）。利用这个钩子函数和错误跟踪服务（如 <a href="https://sentry.io" target="_blank" rel="external">Sentry</a>，它为 Vue 提供<a href="https://sentry.io/for/vue/" target="_blank" rel="external">官方集成</a>），可能是个不错的主意。</p>
-<h2 id="提取-CSS"><a href="#提取-CSS" class="headerlink" title="提取 CSS"></a>提取 CSS</h2><p>使用<a href="single-file-components.html">单文件组件</a>时，<code>&lt;style&gt;</code> 标签在开发运行过程中会被动态实时注入。在生产环境中，你可能需要从所有组件中提取样式到单独的 CSS 文件中。有关如何实现的详细信息，请查阅 <a href="http://vue-loader.vuejs.org/en/configurations/extract-css.html" target="_blank" rel="external">vue-loader</a> 和 <a href="https://github.com/vuejs/vueify#css-extraction" target="_blank" rel="external">vueify</a> 相应文档。</p>
-<p><code>vue-cli</code> 已经配置好了官方的 <code>webpack</code> 模板。</p>
 
     
       <div class="guide-links">

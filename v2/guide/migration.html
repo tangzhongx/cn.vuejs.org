@@ -446,7 +446,7 @@
         
         
         <li>
-            <a href="/v2/guide/deployment.html" class="sidebar-link">生产环境部署</a>
+            <a href="/v2/guide/deployment.html" class="sidebar-link">生产环境部署提示</a>
         </li>
     
         
@@ -778,7 +778,18 @@
   <p>运行端对端测试，将会弹出 <strong>failed tests</strong> 来通知你使用 <code>props</code> 的根实例已经失效。</p>
 </div>
 
-<h2 id="Built-In-指令"><a href="#Built-In-指令" class="headerlink" title="Built-In 指令"></a>Built-In 指令</h2><h3 id="v-bind-真-假值-变更"><a href="#v-bind-真-假值-变更" class="headerlink" title="v-bind 真/假值 变更"></a><code>v-bind</code> 真/假值 <sup>变更</sup></h3><p>在2.0中使用 <code>v-bind</code> 时，只有 <code>null</code>, <code>undefined</code> , 和 <code>false</code> 被看作是假。这意味着，<code>0</code> 和空字符串将被作为真值渲染。比如 <code>v-bind:draggable=&quot;&#39;&#39;&quot;</code> 将被渲染为 <code>draggable=&quot;true&quot;</code>。</p>
+<h2 id="Computed-properties"><a href="#Computed-properties" class="headerlink" title="Computed properties"></a>Computed properties</h2><h3 id="cache-false-deprecated"><a href="#cache-false-deprecated" class="headerlink" title="cache: false deprecated"></a><code>cache: false</code> <sup>deprecated</sup></h3><p>Caching invalidation of computed properties will be removed in future major versions of Vue. Replace any uncached computed properties with methods, which will have the same result.</p>
+<p>For example:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">template: <span class="string">'&lt;p&gt;message: &#123;&#123; timeMessage &#125;&#125;&lt;/p&gt;'</span>,</div><div class="line"><span class="attr">computed</span>: &#123;</div><div class="line">  <span class="attr">timeMessage</span>: &#123;</div><div class="line">    <span class="attr">cache</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="built_in">Date</span>.now() + <span class="keyword">this</span>.message</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Or with component methods:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">template: <span class="string">'&lt;p&gt;message: &#123;&#123; getTimeMessage &#125;&#125;&lt;/p&gt;'</span>,</div><div class="line"><span class="attr">methods</span>: &#123;</div><div class="line">  <span class="attr">getTimeMessage</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Date</span>.now() + <span class="keyword">this</span>.message</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+<div class="upgrade-path">
+  <h4>Upgrade Path</h4>
+  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper" target="_blank" rel="external">migration helper</a> on your codebase to find examples of the <code>cache: false</code> option.</p>
+</div>
+
+<h1 id="Built-In-指令"><a href="#Built-In-指令" class="headerlink" title="Built-In 指令"></a>Built-In 指令</h1><h3 id="v-bind-真-假值-变更"><a href="#v-bind-真-假值-变更" class="headerlink" title="v-bind 真/假值 变更"></a><code>v-bind</code> 真/假值 <sup>变更</sup></h3><p>在2.0中使用 <code>v-bind</code> 时，只有 <code>null</code>, <code>undefined</code> , 和 <code>false</code> 被看作是假。这意味着，<code>0</code> 和空字符串将被作为真值渲染。比如 <code>v-bind:draggable=&quot;&#39;&#39;&quot;</code> 将被渲染为 <code>draggable=&quot;true&quot;</code>。</p>
 <p>对于枚举属性，除了以上假值之外，字符串 <code>&quot;false&quot;</code> 也会被渲染为 <code>attr=&quot;false&quot;</code>。</p>
 <p class="tip">注意，对于其它钩子函数 (如 <code>v-if</code> 和 <code>v-show</code>)， 他们依然遵循 js 对真假值判断的一般规则。</p>
 

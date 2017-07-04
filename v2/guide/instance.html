@@ -446,7 +446,7 @@
         
         
         <li>
-            <a href="/v2/guide/deployment.html" class="sidebar-link">生产环境部署</a>
+            <a href="/v2/guide/deployment.html" class="sidebar-link">生产环境部署提示</a>
         </li>
     
         
@@ -605,9 +605,9 @@
 <p class="tip">注意，不要在实例属性或者回调函数中（如 <code>vm.$watch(&#39;a&#39;, newVal =&gt; this.myMethod())</code>）使用<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="external">箭头函数</a>。因为箭头函数绑定父级上下文，所以 <code>this</code> 不会像预想的一样是 Vue 实例，而是 <code>this.myMethod</code> 未被定义。</p>
 
 <p>实例属性和方法的完整列表中查阅 <a href="../api">API 参考</a>。</p>
-<h2 id="实例生命周期"><a href="#实例生命周期" class="headerlink" title="实例生命周期"></a>实例生命周期</h2><p>每个 Vue 实例在被创建之前都要经过一系列的初始化过程。例如，实例需要配置数据观测(data observer)、编译模版、挂载实例到 DOM ，然后在数据变化时更新 DOM 。在这个过程中，实例也会调用一些 <strong>生命周期钩子</strong> ，这就给我们提供了执行自定义逻辑的机会。例如，<code>created</code> 这个钩子在实例被创建之后被调用：</p>
+<h2 id="实例生命周期"><a href="#实例生命周期" class="headerlink" title="实例生命周期"></a>实例生命周期</h2><p>每个 Vue 实例在被创建之前都要经过一系列的初始化过程。例如，实例需要配置数据观测(data observer)、编译模版、挂载实例到 DOM ，然后在数据变化时更新 DOM 。在这个过程中，实例也会调用一些 <strong>生命周期钩子</strong> ，这就给我们提供了执行自定义逻辑的机会。例如，<a href="../api/#created"><code>created</code></a> 这个钩子在实例被创建之后被调用：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">1</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">created</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// `this` 指向 vm 实例</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'a is: '</span> + <span class="keyword">this</span>.a)</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"><span class="comment">// -&gt; "a is: 1"</span></div></pre></td></tr></table></figure>
-<p>也有一些其它的钩子，在实例生命周期的不同阶段调用，如 <code>mounted</code>、 <code>updated</code> 、<code>destroyed</code> 。钩子的 <code>this</code> 指向调用它的 Vue 实例。一些用户可能会问 Vue.js 是否有“控制器”的概念？答案是，没有。组件的自定义逻辑可以分布在这些钩子中。</p>
+<p>也有一些其它的钩子，在实例生命周期的不同阶段调用，如 <a href="../api/#mounted"><code>mounted</code></a>、<a href="../api/#updated"><code>updated</code></a>、<a href="../api/#destroyed"><code>destroyed</code></a>。钩子的 <code>this</code> 指向调用它的 Vue 实例。一些用户可能会问 Vue.js 是否有“控制器”的概念？答案是，没有。组件的自定义逻辑可以分布在这些钩子中。</p>
 <h2 id="生命周期图示"><a href="#生命周期图示" class="headerlink" title="生命周期图示"></a>生命周期图示</h2><p>下图说明了实例的生命周期。你不需要立马弄明白所有的东西，不过以后它会有帮助。</p>
 <p><img src="/images/lifecycle.png" alt="Lifecycle"></p>
 <hr>
