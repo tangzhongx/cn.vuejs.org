@@ -42,6 +42,8 @@
         <!-- <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'> -->
         <!-- <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'> -->
 
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
         <!-- main page styles -->
         <link rel="stylesheet" href="/css/page.css">
 
@@ -187,8 +189,8 @@
     <div class="list">
         <div class="main-sponsor">
             <span>赞助者</span><br>
-            <a href="https://www.upyun.com/league?utm_source=vue&utm_medium=ad&utm_content=con" target="_blank">
-                <img src="/images/upyun-main-4.jpg">
+            <a href="https://console.upyun.com/register/?invite=H124C2iMZ&utm_source=vue&utm_medium=ad&utm_content=con" target="_blank">
+                <img src="/images/upyun-main.png">
             </a>
         </div>
         <a class="become-backer" href="/support-vuejs">
@@ -573,6 +575,18 @@
             <a href="/v2/guide/join.html" class="sidebar-link">加入Vue.js社区</a>
         </li>
     
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/team.html" class="sidebar-link">认识团队</a>
+        </li>
+    
     
 </ul>
 
@@ -778,18 +792,18 @@
   <p>运行端对端测试，将会弹出 <strong>failed tests</strong> 来通知你使用 <code>props</code> 的根实例已经失效。</p>
 </div>
 
-<h2 id="Computed-properties"><a href="#Computed-properties" class="headerlink" title="Computed properties"></a>Computed properties</h2><h3 id="cache-false-deprecated"><a href="#cache-false-deprecated" class="headerlink" title="cache: false deprecated"></a><code>cache: false</code> <sup>deprecated</sup></h3><p>Caching invalidation of computed properties will be removed in future major versions of Vue. Replace any uncached computed properties with methods, which will have the same result.</p>
-<p>For example:</p>
+<h2 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h2><h3 id="cache-false-弃用"><a href="#cache-false-弃用" class="headerlink" title="cache: false 弃用"></a><code>cache: false</code> <sup>弃用</sup></h3><p>在 Vue 未来的大版本中，计算属性的缓存验证将会被移除。把不缓存的计算属性转换为方法可以得到和之前相同的结果。</p>
+<p>示例：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">template: <span class="string">'&lt;p&gt;message: &#123;&#123; timeMessage &#125;&#125;&lt;/p&gt;'</span>,</div><div class="line"><span class="attr">computed</span>: &#123;</div><div class="line">  <span class="attr">timeMessage</span>: &#123;</div><div class="line">    <span class="attr">cache</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="built_in">Date</span>.now() + <span class="keyword">this</span>.message</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Or with component methods:</p>
+<p>或者使用组件方法：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">template: <span class="string">'&lt;p&gt;message: &#123;&#123; getTimeMessage &#125;&#125;&lt;/p&gt;'</span>,</div><div class="line"><span class="attr">methods</span>: &#123;</div><div class="line">  <span class="attr">getTimeMessage</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Date</span>.now() + <span class="keyword">this</span>.message</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper" target="_blank" rel="external">migration helper</a> on your codebase to find examples of the <code>cache: false</code> option.</p>
+  <h4>升级方式</h4>
+  <p>运行<a href="https://github.com/vuejs/vue-migration-helper" target="_blank" rel="external">迁移工具</a>找到 <code>cache: false</code> 的选项。</p>
 </div>
 
-<h1 id="Built-In-指令"><a href="#Built-In-指令" class="headerlink" title="Built-In 指令"></a>Built-In 指令</h1><h3 id="v-bind-真-假值-变更"><a href="#v-bind-真-假值-变更" class="headerlink" title="v-bind 真/假值 变更"></a><code>v-bind</code> 真/假值 <sup>变更</sup></h3><p>在2.0中使用 <code>v-bind</code> 时，只有 <code>null</code>, <code>undefined</code> , 和 <code>false</code> 被看作是假。这意味着，<code>0</code> 和空字符串将被作为真值渲染。比如 <code>v-bind:draggable=&quot;&#39;&#39;&quot;</code> 将被渲染为 <code>draggable=&quot;true&quot;</code>。</p>
+<h2 id="Built-In-指令"><a href="#Built-In-指令" class="headerlink" title="Built-In 指令"></a>Built-In 指令</h2><h3 id="v-bind-真-假值-变更"><a href="#v-bind-真-假值-变更" class="headerlink" title="v-bind 真/假值 变更"></a><code>v-bind</code> 真/假值 <sup>变更</sup></h3><p>在2.0中使用 <code>v-bind</code> 时，只有 <code>null</code>, <code>undefined</code> , 和 <code>false</code> 被看作是假。这意味着，<code>0</code> 和空字符串将被作为真值渲染。比如 <code>v-bind:draggable=&quot;&#39;&#39;&quot;</code> 将被渲染为 <code>draggable=&quot;true&quot;</code>。</p>
 <p>对于枚举属性，除了以上假值之外，字符串 <code>&quot;false&quot;</code> 也会被渲染为 <code>attr=&quot;false&quot;</code>。</p>
 <p class="tip">注意，对于其它钩子函数 (如 <code>v-if</code> 和 <code>v-show</code>)， 他们依然遵循 js 对真假值判断的一般规则。</p>
 

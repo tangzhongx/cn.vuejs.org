@@ -42,6 +42,8 @@
         <!-- <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'> -->
         <!-- <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'> -->
 
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
         <!-- main page styles -->
         <link rel="stylesheet" href="/css/page.css">
 
@@ -187,8 +189,8 @@
     <div class="list">
         <div class="main-sponsor">
             <span>赞助者</span><br>
-            <a href="https://www.upyun.com/league?utm_source=vue&utm_medium=ad&utm_content=con" target="_blank">
-                <img src="/images/upyun-main-4.jpg">
+            <a href="https://console.upyun.com/register/?invite=H124C2iMZ&utm_source=vue&utm_medium=ad&utm_content=con" target="_blank">
+                <img src="/images/upyun-main.png">
             </a>
         </div>
         <a class="become-backer" href="/support-vuejs">
@@ -573,6 +575,18 @@
             <a href="/v2/guide/join.html" class="sidebar-link">加入Vue.js社区</a>
         </li>
     
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/team.html" class="sidebar-link">认识团队</a>
+        </li>
+    
     
 </ul>
 
@@ -646,7 +660,7 @@
 </blockquote>
 <p>从 2.3 开始你可以为 <code>style</code> 绑定中的属性提供一个包含多个值的数组，常用于提供多个带前缀的值：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:style</span>=<span class="string">"&#123; display: ['-webkit-box', '-ms-flexbox', 'flex'] &#125;"</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>This will only render the last value in the array which the browser supports. In this example, it will render <code>display: flex</code> for browsers that support the unprefixed version of flexbox.</p>
+<p>这会渲染数组中最后一个被浏览器支持的值。在这个例子中，如果浏览器支持不带浏览器前缀的 flexbox，那么渲染结果会是 <code>display: flex</code>。</p>
 <hr>
 <blockquote>
 <p>原文：<a href="http://vuejs.org/guide/class-and-style.html" target="_blank" rel="external">http://vuejs.org/guide/class-and-style.html</a></p>

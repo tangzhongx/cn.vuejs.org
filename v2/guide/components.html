@@ -42,6 +42,8 @@
         <!-- <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'> -->
         <!-- <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'> -->
 
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
         <!-- main page styles -->
         <link rel="stylesheet" href="/css/page.css">
 
@@ -187,8 +189,8 @@
     <div class="list">
         <div class="main-sponsor">
             <span>赞助者</span><br>
-            <a href="https://www.upyun.com/league?utm_source=vue&utm_medium=ad&utm_content=con" target="_blank">
-                <img src="/images/upyun-main-4.jpg">
+            <a href="https://console.upyun.com/register/?invite=H124C2iMZ&utm_source=vue&utm_medium=ad&utm_content=con" target="_blank">
+                <img src="/images/upyun-main.png">
             </a>
         </div>
         <a class="become-backer" href="/support-vuejs">
@@ -573,6 +575,18 @@
             <a href="/v2/guide/join.html" class="sidebar-link">加入Vue.js社区</a>
         </li>
     
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/team.html" class="sidebar-link">认识团队</a>
+        </li>
+    
     
 </ul>
 
@@ -676,7 +690,7 @@ new Vue({
 </script>
 
 <h3 id="构成组件"><a href="#构成组件" class="headerlink" title="构成组件"></a>构成组件</h3><p>组件意味着协同工作，通常父子组件会是这样的关系：组件 A 在它的模版中使用了组件 B 。它们之间必然需要相互通信：父组件要给子组件传递数据，子组件需要将它内部发生的事情告知给父组件。然而，在一个良好定义的接口中尽可能将父子组件解耦是很重要的。这保证了每个组件可以在相对隔离的环境中书写和理解，也大幅提高了组件的可维护性和可重用性。</p>
-<p>在 Vue.js 中，父子组件的关系可以总结为 <strong>props down, events up</strong> 。父组件通过 <strong>props</strong> 向下传递数据给子组件，子组件通过 <strong>events</strong> 给父组件发送消息。看看它们是怎么工作的。</p>
+<p>在 Vue 中，父子组件的关系可以总结为 <strong>props down, events up</strong> 。父组件通过 <strong>props</strong> 向下传递数据给子组件，子组件通过 <strong>events</strong> 给父组件发送消息。看看它们是怎么工作的。</p>
 <p style="text-align: center"><br>  <img style="width:300px" src="/images/props-events.png" alt="props down, events up"><br></p>
 
 <h2 id="Prop"><a href="#Prop" class="headerlink" title="Prop"></a>Prop</h2><h3 id="使用-Prop-传递数据"><a href="#使用-Prop-传递数据" class="headerlink" title="使用 Prop 传递数据"></a>使用 Prop 传递数据</h3><p>组件实例的作用域是<strong>孤立的</strong>。这意味着不能(也不应该)在子组件的模板内直接引用父组件的数据。要让子组件使用父组件的数据，我们需要通过子组件的props选项。</p>
@@ -769,7 +783,22 @@ new Vue({
 <li>Symbol</li>
 </ul>
 <p><code>type</code> 也可以是一个自定义构造器函数，使用 <code>instanceof</code> 检测。</p>
-<p>当 prop 验证失败，Vue会在抛出警告 (如果使用的是开发版本)。</p>
+<p>当 prop 验证失败，Vue会在抛出警告 (如果使用的是开发版本)。Note that props are validated <strong>before</strong> a component instance is created, so within <code>default</code> or <code>validator</code> functions, instance properties such as from <code>data</code>, <code>computed</code>, or <code>methods</code> will not be available.</p>
+<h2 id="Non-Prop-Attributes"><a href="#Non-Prop-Attributes" class="headerlink" title="Non-Prop Attributes"></a>Non-Prop Attributes</h2><p>A non-prop attribute is an attribute that is passed to a component, but does not have a corresponding prop defined.</p>
+<p>While explicitly defined props are preferred for passing information to a child component, authors of component libraries can’t always foresee the contexts in which their components might be used. That’s why components can accept arbitrary attributes, which are added to the component’s root element.</p>
+<p>For example, imagine we’re using a 3rd-party <code>bs-date-input</code> component with a Bootstrap plugin that requires a <code>data-3d-date-picker</code> attribute on the <code>input</code>. We can add this attribute to our component instance:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bs-date-input</span> <span class="attr">data-3d-date-picker</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">bs-date-input</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>And the <code>data-3d-date-picker=&quot;true&quot;</code> attribute will automatically be added to the root element of <code>bs-date-input</code>.</p>
+<h3 id="Replacing-Merging-with-Existing-Attributes"><a href="#Replacing-Merging-with-Existing-Attributes" class="headerlink" title="Replacing/Merging with Existing Attributes"></a>Replacing/Merging with Existing Attributes</h3><p>Imagine this is the template for <code>bs-date-input</code>:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"date"</span> <span class="attr">class</span>=<span class="string">"form-control"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>To add specify a theme for our date picker plugin, we might need to add a specific class, like this:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bs-date-input</span></span></div><div class="line">  <span class="attr">data-3d-date-picker</span>=<span class="string">"true"</span></div><div class="line">  <span class="attr">class</span>=<span class="string">"date-picker-theme-dark"</span></div><div class="line">&gt;<span class="tag">&lt;/<span class="name">bs-date-input</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>In this case, two different values for <code>class</code> are defined:</p>
+<ul>
+<li><code>form-control</code>, which is set by the component in its template</li>
+<li><code>date-picker-theme-dark</code>, which is passed to the component by its parent</li>
+</ul>
+<p>For most attributes, the value provided to the component will replace the value set by the component. So for example, passing <code>type=&quot;large&quot;</code> will replace <code>type=&quot;date&quot;</code> and probably break it! Fortunately, the <code>class</code> and <code>style</code> attributes are a little smarter, so both values are merged, making the final value: <code>form-control date-picker-theme-dark</code>.</p>
 <h2 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h2><p>我们知道，父组件是使用 props 传递数据给子组件，但如果子组件要把数据传递回去，应该怎样做？那就是自定义事件！</p>
 <h3 id="使用-v-on-绑定自定义事件"><a href="#使用-v-on-绑定自定义事件" class="headerlink" title="使用 v-on 绑定自定义事件"></a>使用 <code>v-on</code> 绑定自定义事件</h3><p>每个 Vue 实例都实现了<a href="../api/#实例方法-事件">事件接口(Events interface)</a>，即：</p>
 <ul>
@@ -948,7 +977,7 @@ new Vue({
 <p>作用域插槽是一种特殊类型的插槽，用作使用一个（能够传递数据到）可重用模板替换已渲染元素。</p>
 <p>在子组件中，只需将数据传递到插槽，就像你将 prop 传递给组件一样：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">text</span>=<span class="string">"hello from child"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>在父级中，具有特殊属性 <code>scope</code> 的 <code>&lt;template&gt;</code> 元素，表示它是作用域插槽的模板。<code>scope</code> 的值对应一个临时变量名，此变量接收从子组件中传递的 prop 对象：</p>
+<p>在父级中，具有特殊属性 <code>scope</code> 的 <code>&lt;template&gt;</code> 元素必须存在，表示它是作用域插槽的模板。<code>scope</code> 的值对应一个临时变量名，此变量接收从子组件中传递的 prop 对象：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">child</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">scope</span>=<span class="string">"props"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>hello from parent<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; props.text &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">child</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>如果我们渲染以上结果，得到的输出会是：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>hello from parent<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>hello from child<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -983,7 +1012,7 @@ new Vue({
 
 <h3 id="异步组件"><a href="#异步组件" class="headerlink" title="异步组件"></a>异步组件</h3><p>在大型应用中，我们可能需要将应用拆分为多个小模块，按需从服务器下载。为了让事情更简单， Vue.js 允许将组件定义为一个工厂函数，动态地解析组件的定义。Vue.js 只在组件需要渲染时触发工厂函数，并且把结果缓存起来，用于后面的再次渲染。例如：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.component(<span class="string">'async-example'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// Pass the component definition to the resolve callback</span></div><div class="line">    resolve(&#123;</div><div class="line">      <span class="attr">template</span>: <span class="string">'&lt;div&gt;I am async!&lt;/div&gt;'</span></div><div class="line">    &#125;)</div><div class="line">  &#125;, <span class="number">1000</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>工厂函数接收一个 <code>resolve</code> 回调，在收到从服务器下载的组件定义时调用。也可以调用 <code>reject(reason)</code> 指示加载失败。这里 <code>setTimeout</code> 只是为了演示。怎么获取组件完全由你决定。推荐配合使用 ：<a href="http://webpack.github.io/docs/code-splitting.html" target="_blank" rel="external">Webpack 的代码分割功能</a>：</p>
+<p>工厂函数接收一个 <code>resolve</code> 回调，在收到从服务器下载的组件定义时调用。也可以调用 <code>reject(reason)</code> 指示加载失败。这里 <code>setTimeout</code> 只是为了演示。怎么获取组件完全由你决定。推荐配合使用 ：<a href="https://webpack.js.org/guides/code-splitting/" target="_blank" rel="external">Webpack 的代码分割功能</a>：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.component(<span class="string">'async-webpack-example'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>&#123;</div><div class="line">  <span class="comment">// 这个特殊的 require 语法告诉 webpack</span></div><div class="line">  <span class="comment">// 自动将编译后的代码分割成不同的块，</span></div><div class="line">  <span class="comment">// 这些块将通过 Ajax 请求自动下载。</span></div><div class="line">  <span class="built_in">require</span>([<span class="string">'./my-async-component'</span>], resolve)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p>你可以使用 Webpack 2 + ES2015 的语法返回一个 <code>Promise</code> resolve 函数：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.component(</div><div class="line">  <span class="string">'async-webpack-example'</span>,</div><div class="line">  () =&gt; <span class="keyword">import</span>(<span class="string">'./my-async-component'</span>)</div><div class="line">)</div></pre></td></tr></table></figure>
