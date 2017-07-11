@@ -18,7 +18,7 @@
 }
 @font-face {
   font-family: "Dosis";
-  src: local("Dosis Medium"), local("Dosis-Medium"), url("/fonts/Dosis/Dosis-Medium.ttf");
+  src: local("Dosis Medium"), url("/fonts/Dosis/Dosis-Medium.ttf");
   font-weight: 500;
 }
 .gutter pre {
@@ -164,8 +164,6 @@ p {
 }
 a.button {
   padding: 0.75em 2em;
-  min-width: 8em;
-  text-align: center;
   border-radius: 2em;
   display: inline-block;
   color: #fff;
@@ -571,7 +569,7 @@ body.docs #nav {
 @media screen and (max-width: 900px) {
   .sidebar {
     position: fixed;
-    z-index: 8;
+    z-index: 10;
     background-color: #f9f9f9;
     height: 100%;
     top: 0;
@@ -582,8 +580,11 @@ body.docs #nav {
     transform: translate(-280px, 0);
   }
   .sidebar .sidebar-inner {
-    padding: 60px 30px 30px;
+    padding: 50px 10px 10px 20px;
     box-sizing: border-box;
+  }
+  .sidebar .sidebar-inner-index {
+    padding: 10px 10px 10px 20px;
   }
   .sidebar .search-query {
     width: 200px;
@@ -658,6 +659,8 @@ body {
   font-size: 1.05em;
   font-weight: 600;
   letter-spacing: 0.1em;
+  min-width: 8em;
+  text-align: center;
 }
 #hero .button:first-child {
   margin-right: 1em;
