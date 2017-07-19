@@ -7,6 +7,14 @@
         <meta name="description" content="Vue.js - The Progressive JavaScript Framework">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
+        <link rel="alternate" hreflang="x-default" href="https://vuejs.org/v2/guide/render-function.html">
+        <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/v2/guide/render-function.html">
+        <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/v2/guide/render-function.html">
+        <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/v2/guide/render-function.html">
+        <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/v2/guide/render-function.html">
+        <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/v2/guide/render-function.html">
+        <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/v2/guide/render-function.html">
+
         <meta property="og:type" content="article">
         <meta property="og:title" content="Render 函数 — Vue.js">
         <meta property="og:description" content="Vue.js - The Progressive JavaScript Framework">
@@ -730,7 +738,7 @@
 <li><code>injections</code>: (2.3.0+) 如果使用了 <a href="../api/#provide-inject"><code>inject</code></a> 选项, 则该对象包含了应当被注入的属性。</li>
 </ul>
 <p>在添加 <code>functional: true</code> 之后，锚点标题组件的 render 函数之间简单更新增加 <code>context</code> 参数，<code>this.$slots.default</code> 更新为 <code>context.children</code>，之后<code>this.level</code> 更新为 <code>context.props.level</code>。</p>
-<p>因为函数化组件只是一个函数，所以渲染开销也低很多。另外，这也意味着函数化组件不会出现在 VueJS Chrome 开发者工具的组件树里。</p>
+<p>因为函数化组件只是一个函数，所以渲染开销也低很多。然而，对持久化实例的缺乏也意味着函数化组件不会出现在 <a href="https://github.com/vuejs/vue-devtools" target="_blank" rel="external">Vue devtools</a> 的组件树里。</p>
 <p>在作为包装组件时它们也同样非常有用，比如，当你需要做这些时：</p>
 <ul>
 <li>程序化地在多个组件中选择一个</li>
