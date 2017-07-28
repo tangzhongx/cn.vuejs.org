@@ -120,12 +120,12 @@
 <li class="nav-dropdown-container language">
   <a class="nav-link">多语言</a><span class="arrow"></span>
   <ul class="nav-dropdown">
-    <li><a href="https://vuejs.org/" class="nav-link" target="_blank">English</a></li>
-    <li><a href="https://jp.vuejs.org/" class="nav-link" target="_blank">日本語</a></li>
-    <li><a href="https://ru.vuejs.org/" class="nav-link" target="_blank">Русский</a></li>
-    <li><a href="https://kr.vuejs.org/" class="nav-link" target="_blank">한국어</a></li>
-    <li><a href="https://br.vuejs.org/" class="nav-link" target="_blank">Português</a></li>
-    <li><a href="https://fr.vuejs.org/" class="nav-link" target="_blank">Français</a></li>
+    <li><a href="https://vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">English</a></li>
+    <li><a href="https://jp.vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">日本語</a></li>
+    <li><a href="https://ru.vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">Русский</a></li>
+    <li><a href="https://kr.vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">한국어</a></li>
+    <li><a href="https://br.vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">Português</a></li>
+    <li><a href="https://fr.vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">Français</a></li>
   </ul>
 </li>
 
@@ -184,12 +184,12 @@
 <li class="nav-dropdown-container language">
   <a class="nav-link">多语言</a><span class="arrow"></span>
   <ul class="nav-dropdown">
-    <li><a href="https://vuejs.org/" class="nav-link" target="_blank">English</a></li>
-    <li><a href="https://jp.vuejs.org/" class="nav-link" target="_blank">日本語</a></li>
-    <li><a href="https://ru.vuejs.org/" class="nav-link" target="_blank">Русский</a></li>
-    <li><a href="https://kr.vuejs.org/" class="nav-link" target="_blank">한국어</a></li>
-    <li><a href="https://br.vuejs.org/" class="nav-link" target="_blank">Português</a></li>
-    <li><a href="https://fr.vuejs.org/" class="nav-link" target="_blank">Français</a></li>
+    <li><a href="https://vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">English</a></li>
+    <li><a href="https://jp.vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">日本語</a></li>
+    <li><a href="https://ru.vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">Русский</a></li>
+    <li><a href="https://kr.vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">한국어</a></li>
+    <li><a href="https://br.vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">Português</a></li>
+    <li><a href="https://fr.vuejs.org/v2/guide/conditional.html" class="nav-link" target="_blank">Français</a></li>
   </ul>
 </li>
 
@@ -703,7 +703,6 @@ new Vue({
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-show</span>=<span class="string">"ok"</span>&gt;</span>Hello!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>不同的是带有 <code>v-show</code> 的元素始终会被渲染并保留在 DOM 中。<code>v-show</code> 是简单地切换元素的 CSS 属性 <code>display</code> 。</p>
 <p class="tip">注意， <code>v-show</code> 不支持 <code>&lt;template&gt;</code> 语法，也不支持 <code>v-else</code>。</p>
-
 
 <h2 id="v-if-vs-v-show"><a href="#v-if-vs-v-show" class="headerlink" title="v-if vs v-show"></a><code>v-if</code> vs <code>v-show</code></h2><p><code>v-if</code> 是“真正的”条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。</p>
 <p><code>v-if</code> 也是<strong>惰性的</strong>：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。</p>

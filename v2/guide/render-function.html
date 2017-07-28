@@ -120,12 +120,12 @@
 <li class="nav-dropdown-container language">
   <a class="nav-link">多语言</a><span class="arrow"></span>
   <ul class="nav-dropdown">
-    <li><a href="https://vuejs.org/" class="nav-link" target="_blank">English</a></li>
-    <li><a href="https://jp.vuejs.org/" class="nav-link" target="_blank">日本語</a></li>
-    <li><a href="https://ru.vuejs.org/" class="nav-link" target="_blank">Русский</a></li>
-    <li><a href="https://kr.vuejs.org/" class="nav-link" target="_blank">한국어</a></li>
-    <li><a href="https://br.vuejs.org/" class="nav-link" target="_blank">Português</a></li>
-    <li><a href="https://fr.vuejs.org/" class="nav-link" target="_blank">Français</a></li>
+    <li><a href="https://vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">English</a></li>
+    <li><a href="https://jp.vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">日本語</a></li>
+    <li><a href="https://ru.vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">Русский</a></li>
+    <li><a href="https://kr.vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">한국어</a></li>
+    <li><a href="https://br.vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">Português</a></li>
+    <li><a href="https://fr.vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">Français</a></li>
   </ul>
 </li>
 
@@ -184,12 +184,12 @@
 <li class="nav-dropdown-container language">
   <a class="nav-link">多语言</a><span class="arrow"></span>
   <ul class="nav-dropdown">
-    <li><a href="https://vuejs.org/" class="nav-link" target="_blank">English</a></li>
-    <li><a href="https://jp.vuejs.org/" class="nav-link" target="_blank">日本語</a></li>
-    <li><a href="https://ru.vuejs.org/" class="nav-link" target="_blank">Русский</a></li>
-    <li><a href="https://kr.vuejs.org/" class="nav-link" target="_blank">한국어</a></li>
-    <li><a href="https://br.vuejs.org/" class="nav-link" target="_blank">Português</a></li>
-    <li><a href="https://fr.vuejs.org/" class="nav-link" target="_blank">Français</a></li>
+    <li><a href="https://vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">English</a></li>
+    <li><a href="https://jp.vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">日本語</a></li>
+    <li><a href="https://ru.vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">Русский</a></li>
+    <li><a href="https://kr.vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">한국어</a></li>
+    <li><a href="https://br.vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">Português</a></li>
+    <li><a href="https://fr.vuejs.org/v2/guide/render-function.html" class="nav-link" target="_blank">Français</a></li>
   </ul>
 </li>
 
@@ -717,7 +717,7 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">createElement(</div><div class="line">  <span class="string">'anchored-heading'</span>, &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">level</span>: <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">  &#125;, [</div><div class="line">    createElement(<span class="string">'span'</span>, <span class="string">'Hello'</span>),</div><div class="line">    <span class="string">' world!'</span></div><div class="line">  ]</div><div class="line">)</div></pre></td></tr></table></figure>
 <p>特别是模板如此简单的情况下：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">anchored-heading</span> <span class="attr">:level</span>=<span class="string">"1"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">span</span>&gt;</span> world!</div><div class="line"><span class="tag">&lt;/<span class="name">anchored-heading</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这就是会有一个 <a href="https://github.com/vuejs/babel-plugin-transform-vue-jsx" target="_blank" rel="external">Babel plugin</a> 插件，用于在 Vue 中使用 JSX 语法的原因，它可以让我们回到于更接近模板的语法上。</p>
+<p>这就是为什么会有一个 <a href="https://github.com/vuejs/babel-plugin-transform-vue-jsx" target="_blank" rel="external">Babel 插件</a> ，用于在 Vue 中使用 JSX 语法的原因，它可以让我们回到更接近于模板的语法上。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> AnchoredHeading <span class="keyword">from</span> <span class="string">'./AnchoredHeading.vue'</span></div><div class="line"></div><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'#demo'</span>,</div><div class="line">  render (h) &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">AnchoredHeading</span> <span class="attr">level</span>=<span class="string">&#123;1&#125;</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">span</span>&gt;</span> world!</div><div class="line">      <span class="tag">&lt;/<span class="name">AnchoredHeading</span>&gt;</span></div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p class="tip">将 <code>h</code> 作为 <code>createElement</code> 的别名是 Vue 生态系统中的一个通用惯例，实际上也是 JSX 所要求的，如果在作用域中 <code>h</code> 失去作用， 在应用中会触发报错。</p>
 
@@ -725,7 +725,7 @@
 <h2 id="函数化组件"><a href="#函数化组件" class="headerlink" title="函数化组件"></a>函数化组件</h2><p>之前创建的锚点标题组件是比较简单，没有管理或者监听任何传递给他的状态，也没有生命周期方法。它只是一个接收参数的函数。<br>在这个例子中，我们标记组件为 <code>functional</code>， 这意味它是无状态（没有 <code>data</code>），无实例（没有 <code>this</code> 上下文）。<br>一个 <strong>函数化组件</strong> 就像这样：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-component'</span>, &#123;</div><div class="line">  <span class="attr">functional</span>: <span class="literal">true</span>,</div><div class="line">  <span class="comment">// 为了弥补缺少的实例</span></div><div class="line">  <span class="comment">// 提供第二个参数作为上下文</span></div><div class="line">  render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement, context</span>) </span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">  &#125;,</div><div class="line">  <span class="comment">// Props 可选</span></div><div class="line">  props: &#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <blockquote>
-<p>注意：在 &lt;2.3.0 的版本中，如果一个函数式组件想要接受 props，则 <code>props</code> 选项是必须的。在 2.3.0 或以上的版本中，你可以省略 <code>props</code> 选项，所有组件上的属性都会被自动解析为 props。</p>
+<p>注意：在 2.3.0 之前的版本中，如果一个函数式组件想要接受 props，则 <code>props</code> 选项是必须的。在 2.3.0 或以上的版本中，你可以省略 <code>props</code> 选项，所有组件上的属性都会被自动解析为 props。</p>
 </blockquote>
 <p>组件需要的一切都是通过上下文传递，包括：</p>
 <ul>
