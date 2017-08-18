@@ -822,7 +822,7 @@ new Vue({
 <p class="tip">Vue 的事件系统分离自浏览器的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget" target="_blank" rel="external">EventTarget API</a>。尽管它们的运行类似，但是 <code>$on</code> 和 <code>$emit</code> <strong>不是</strong><code>addEventListener</code> 和 <code>dispatchEvent</code> 的别名。</p>
 
 <p>另外，父组件可以在使用子组件的地方直接用 <code>v-on</code> 来监听子组件触发的事件。</p>
-<p class="tip">不能用 <code>$on</code> 侦听子组件抛出的事件，而必须在模板里直接用 <code>v-on</code> 绑定，就像以下的例子：</p>
+<p class="tip">不能用 <code>$on</code> 侦听子组件释放的事件，而必须在模板里直接用 <code>v-on</code> 绑定，就像以下的例子：</p>
 
 <p>下面是一个例子：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"counter-event-example"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; total &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button-counter</span> <span class="attr">v-on:increment</span>=<span class="string">"incrementTotal"</span>&gt;</span><span class="tag">&lt;/<span class="name">button-counter</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button-counter</span> <span class="attr">v-on:increment</span>=<span class="string">"incrementTotal"</span>&gt;</span><span class="tag">&lt;/<span class="name">button-counter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>

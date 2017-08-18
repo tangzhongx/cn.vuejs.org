@@ -655,7 +655,7 @@ new Vue({
 })
 </script>
 
-<p class="tip">在文本区域插值( <code>&lt;textarea&gt;&lt;/textarea&gt;</code> ) 并不会生效，应用 <code>v-model</code> 来代替</p>
+<p class="tip">在文本区域插值( <code>&lt;textarea&gt;&lt;/textarea&gt;</code> ) 并不会生效，应用 <code>v-model</code> 来代替。</p>
 
 <h3 id="复选框"><a href="#复选框" class="headerlink" title="复选框"></a>复选框</h3><p>单个勾选框，逻辑值：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"checkbox"</span> <span class="attr">v-model</span>=<span class="string">"checked"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"checkbox"</span>&gt;</span>&#123;&#123; checked &#125;&#125;<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -717,7 +717,7 @@ new Vue({
 })
 </script>
 
-<h3 id="选择列表"><a href="#选择列表" class="headerlink" title="选择列表"></a>选择列表</h3><p>单选列表:</p>
+<h3 id="选择列表"><a href="#选择列表" class="headerlink" title="选择列表"></a>选择列表</h3><p>单选列表：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"example-5"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">v-model</span>=<span class="string">"selected"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">disabled</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>请选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span>&gt;</span>A<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span>&gt;</span>B<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span>&gt;</span>C<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>Selected: &#123;&#123; selected &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'...'</span>,</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">selected</span>: <span class="string">''</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 
@@ -808,7 +808,7 @@ new Vue({
 <h2 id="v-model-与组件"><a href="#v-model-与组件" class="headerlink" title="v-model 与组件"></a><code>v-model</code> 与组件</h2><blockquote>
 <p>如果你还不熟悉Vue的组件，跳过这里即可。</p>
 </blockquote>
-<p>HTML 内建的 input 类型有时不能满足你的需求。还好，Vue 的组件系统允许你创建一个具有自定义行为可复用的 input 类型，这些 input 类型甚至可以和 <code>v-model</code> 一起使用！要了解更多，请参阅<a href="components.html#使用自定义事件的表单输入组件">自定义 input 类型</a></p>
+<p>HTML 内建的 input 类型有时不能满足你的需求。还好，Vue 的组件系统允许你创建一个具有自定义行为可复用的 input 类型，这些 input 类型甚至可以和 <code>v-model</code> 一起使用！要了解更多，请参阅<a href="components.html#使用自定义事件的表单输入组件">自定义 input 类型</a>。</p>
 <hr>
 <blockquote>
 <p>原文：<a href="http://vuejs.org/guide/forms.html" target="_blank" rel="external">http://vuejs.org/guide/forms.html</a></p>
